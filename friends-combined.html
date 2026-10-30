@@ -87,6 +87,9 @@
 .profile-block p{font-size:13px;margin:0}
 .sheet-actions{display:flex;gap:10px;margin-top:22px}
 .sheet-actions .primary-pill{flex:1;min-width:0;height:46px}
+.danger-pill{height:46px;border:1px solid #b65b4b;border-radius:100px;padding:0 18px;background:transparent;color:#9c4034;font-size:12px;transition:background .2s,color .2s,border-color .2s}
+.danger-pill:hover{background:#9c4034;color:#fff8e8;border-color:#9c4034}
+.danger-pill[hidden]{display:none}
 .primary-pill:disabled{opacity:.6;cursor:default;transform:none;box-shadow:none}
 
 /* Chat */
@@ -221,6 +224,7 @@
       </div>
       <div class="sheet-actions" id="pmActions">
         <button class="primary-pill" id="connectButton">Send friend request</button>
+        <button class="danger-pill" id="deleteAccountButton" type="button" hidden>Delete my account</button>
       </div>
     </div>
   </div>
@@ -408,6 +412,7 @@
 
   // ---------- Profile popup + request + chat ----------
   const connectButton = $('connectButton');
+  const deleteAccountButton = $('deleteAccountButton');
   const chat = $('chat'), chatLog = $('chatLog'), chatForm = $('chatForm'), chatInput = $('chatInput');
 
   function openProfile(p) {
@@ -429,11 +434,26 @@
     const state = requests[current.id];
     const isMe = current.id === 'me';
     connectButton.hidden = isMe;
+    deleteAccountButton.hidden = !isMe;
     connectButton.disabled = state === 'sent';
     connectButton.textContent = state === 'sent' ? 'Request sent' : state === 'friends' ? 'Message' : 'Send friend request';
     chat.hidden = state !== 'friends';
     if (state === 'friends') drawChat();
   }
+
+  deleteAccountButton.addEventListener('click', () => {
+    if (!mine) return;
+    const confirmed = window.confirm('Delete your Campus profile and account data from this browser? This cannot be undone.');
+    if (!confirmed) return;
+    ['cc_my_profile', 'cc_friend_requests', 'cc_friend_chats'].forEach(key => localStorage.removeItem(key));
+    mine = null;
+    requests = {};
+    chats = {};
+    current = null;
+    closeModal(profileModal);
+    render();
+    showToast('Your Campus profile has been deleted from this browser.');
+  });
 
   connectButton.addEventListener('click', () => {
     if (!current) return;
