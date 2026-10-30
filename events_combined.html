@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#b8c4a5">
+  <title>Events — Campus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+:root{--ink:#282b24;--muted:#666b5e;--cream:#f2eddd;--sage:#b9c5a7;--dark:#292a24;--line:rgba(45,48,39,.18);--ease:cubic-bezier(.2,.75,.25,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:'DM Sans',sans-serif;background:#c8cfb8;min-height:100vh}button,a,input,textarea,select{font:inherit}button,a{cursor:pointer}a{color:inherit;text-decoration:none}.ambient{position:fixed;pointer-events:none;z-index:-1;inset:0}.ambient-one{background:radial-gradient(ellipse at 16% 8%,rgba(113,139,111,.52),transparent 42%),radial-gradient(ellipse at 78% 74%,rgba(255,190,105,.58),transparent 43%),linear-gradient(155deg,#b5c3a8 0%,#d7d5b7 46%,#f2c17d 100%)}.ambient-two{opacity:.14;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E")}
+.topbar{height:82px;padding:0 5.2%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(45,48,39,.1)}.brand{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:18px;letter-spacing:-.8px}.brand-mark{width:27px;height:27px;border-radius:50%;background:var(--dark);color:#f1ecd9;display:grid;place-items:center;font-family:Manrope,sans-serif;font-size:19px;font-weight:400}.brand-dot{color:#c77f45}.nav-links{display:flex;gap:31px}.nav-links a{font-size:12px;color:#53594c}.nav-links a.active{color:#292b24;font-weight:700}.header-actions{display:flex;align-items:center;gap:12px}.back-link{font-size:11px;background:rgba(247,240,221,.8);padding:12px 17px;border-radius:100px}.menu-button{display:none;border:0;background:transparent;font-size:22px}
+main{max-width:1240px;margin:auto;padding:0 5.2%}.page-heading{padding:70px 0 26px}.eyebrow{font-size:9px;letter-spacing:1.65px;font-weight:700;color:#4c5846;display:flex;align-items:center;gap:9px}.live-dot{height:6px;width:6px;border-radius:50%;background:#4f7851;box-shadow:0 0 0 4px rgba(79,120,81,.12)}.heading-row{display:flex;align-items:flex-end;justify-content:space-between;gap:25px;margin:18px 0 43px}h1{font-family:Manrope,sans-serif;font-weight:300;letter-spacing:-3.8px;font-size:clamp(48px,6.3vw,78px);line-height:.98;margin:0;color:#f8f2df;text-shadow:0 2px 30px rgba(96,91,65,.08)}h1 span{color:#fff8e8}.intro{max-width:490px;color:#535a4d;font-size:13px;line-height:1.8;margin:18px 0 0}.primary-button,.publish-button{border:0;background:#292b24;color:#f7f0dc;border-radius:100px;padding:0 24px;height:48px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:12px;box-shadow:0 10px 25px rgba(58,49,33,.12);transition:transform .25s var(--ease),box-shadow .25s}.primary-button:hover,.publish-button:hover{transform:translateY(-2px);box-shadow:0 13px 28px rgba(58,49,33,.2)}.primary-button span{font-size:18px}.heading-rule{display:flex;justify-content:space-between;border-bottom:1px solid rgba(45,48,39,.3);padding:0 0 13px;color:#555c4d;font-size:9px;letter-spacing:1.5px;font-weight:700}
+.events-section{padding:25px 0 100px}.toolbar{display:flex;align-items:center;gap:15px;margin-bottom:25px}.search-box{height:42px;min-width:235px;flex:1;display:flex;align-items:center;gap:10px;padding:0 14px;border-radius:100px;background:rgba(247,240,221,.78);border:1px solid rgba(45,48,39,.1)}.search-box span{font-size:20px;color:#656b5c}.search-box input{width:100%;border:0;outline:0;background:transparent;font-size:11px;color:var(--ink)}.filters{display:flex;gap:5px;flex-wrap:wrap}.filter{border:1px solid rgba(45,48,39,.16);background:rgba(247,240,221,.35);border-radius:100px;padding:10px 13px;font-size:10px;color:#4d5448;transition:.2s}.filter:hover,.filter.active{background:#292b24;color:#f7f0dc;border-color:#292b24}.toolbar>select{height:40px;border:1px solid rgba(45,48,39,.16);border-radius:100px;background:rgba(247,240,221,.75);padding:0 13px;color:#41473c;font-size:10px;outline:0}
+.event-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.event-card{overflow:hidden;border-radius:17px;background:#f2eddd;box-shadow:0 15px 38px rgba(48,47,35,.1);animation:cardIn .35s var(--ease) both}.event-image-wrap{height:190px;position:relative;background:#d9ddcd;overflow:hidden}.event-image{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}.event-card:hover .event-image{transform:scale(1.04)}.event-category{position:absolute;top:13px;left:13px;border-radius:100px;padding:7px 10px;background:rgba(36,39,31,.72);backdrop-filter:blur(8px);color:#f7f0dc;font-size:8px;letter-spacing:1px;text-transform:uppercase}.event-body{padding:18px 19px 19px}.event-date{font-size:9px;letter-spacing:1px;color:#7d826f;text-transform:uppercase}.event-body h2{font:500 21px Manrope,sans-serif;letter-spacing:-.6px;margin:8px 0;color:#292b24}.event-description{font-size:11px;line-height:1.7;color:#6c7063;min-height:38px;margin:0 0 16px;white-space:pre-wrap;overflow-wrap:anywhere}.event-meta{display:grid;gap:8px;border-top:1px solid #dcd8c9;padding-top:13px}.meta-line{display:flex;align-items:center;gap:9px;font-size:10px;color:#555c4d}.meta-icon{width:17px;text-align:center;color:#8b987a}.event-organizer{font-size:9px;color:#888b7e;margin-top:14px}.empty-state{grid-column:1/-1;text-align:center;padding:75px 20px 85px;border:1px dashed rgba(45,48,39,.25);border-radius:18px;background:rgba(247,240,221,.23)}.empty-mark{font-size:34px;color:#7d8e70}.empty-state h2{font:400 25px Manrope,sans-serif;margin:12px 0 7px}.empty-state p{font-size:12px;color:#666d5e;margin:0 0 18px}.text-button{border:0;background:transparent;color:#3f5238;font-size:11px;font-weight:700;padding:8px}.no-results{grid-column:1/-1;text-align:center;padding:60px 20px;color:#5c6255;font-size:13px}
+.modal-backdrop{position:fixed;inset:0;z-index:30;background:rgba(26,29,24,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}.modal-backdrop.open{opacity:1;visibility:visible}.event-modal{width:min(610px,100%);max-height:90vh;overflow:auto;background:#f4efdf;border-radius:20px;padding:27px 30px 25px;box-shadow:0 30px 100px #15171155;transform:translateY(12px) scale(.985);transition:transform .25s var(--ease)}.modal-backdrop.open .event-modal{transform:translateY(0) scale(1)}.modal-header{display:flex;justify-content:space-between;align-items:flex-start}.modal-header h2{font:400 34px Manrope,sans-serif;letter-spacing:-1.5px;margin:8px 0 0}.modal-header h2 span{color:#c77f45}.close-button{border:0;background:#e5e3d4;width:34px;height:34px;border-radius:50%;font-size:22px;color:#41463b}.modal-copy{font-size:11px;line-height:1.7;color:#727667;margin:10px 0 22px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:15px}.field label{font-size:10px;font-weight:700;color:#454b3f}.field label span{color:#b66d43}.field input,.field textarea,.field select{width:100%;border:1px solid #d7d4c5;border-radius:9px;background:#fbf8ed;padding:11px 12px;font-size:11px;color:#292b24;outline:0;transition:border .2s,box-shadow .2s}.field input:focus,.field textarea:focus,.field select:focus{border-color:#829274;box-shadow:0 0 0 3px rgba(130,146,116,.13)}.field textarea{resize:vertical;min-height:78px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}.upload-area{height:112px;border:1px dashed #aeb59f;border-radius:11px;background:#e9eadc;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer;overflow:hidden;position:relative}.upload-area:hover{background:#e2e6d7}.upload-icon{font-size:22px;color:#65765a}.upload-area strong{font-size:10px;color:#434a3d}.upload-area small{font-size:9px;color:#858979}.upload-area img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.upload-area.has-image .upload-icon,.upload-area.has-image strong,.upload-area.has-image small{display:none}.form-error{min-height:15px;margin:0;color:#a34d36;font-size:10px}.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:13px}.cancel-button{border:1px solid #d2cfbf;background:transparent;border-radius:100px;padding:0 20px;height:43px;font-size:11px;color:#555b4d}.publish-button{height:43px;padding:0 21px;font-size:11px}.publish-button:disabled{opacity:.55;cursor:wait}.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,15px);opacity:0;pointer-events:none;z-index:60;background:#282b24;color:#f5efdc;border-radius:100px;padding:12px 19px;font-size:11px;box-shadow:0 10px 40px #34302030;transition:all .25s;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}@keyframes cardIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:950px){.toolbar{flex-wrap:wrap}.search-box{flex-basis:45%}.filters{order:3;width:100%}.event-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.topbar{height:68px;padding:0 20px}.nav-links{display:none;position:absolute;top:60px;left:16px;right:16px;padding:16px;background:#f2eddd;border-radius:14px;box-shadow:0 15px 40px #292b2420;flex-direction:column;gap:17px;z-index:5}.nav-links.open{display:flex}.menu-button{display:block}.back-link{font-size:10px;padding:10px 12px}main{padding:0 20px}.page-heading{padding:48px 0 22px}.heading-row{align-items:flex-start;flex-direction:column;margin:18px 0 30px;gap:20px}h1{font-size:55px;letter-spacing:-2.8px}.intro{font-size:12px;margin-top:14px}.primary-button{height:44px}.events-section{padding-top:20px}.toolbar{gap:10px}.search-box{flex-basis:100%;height:43px}.filters{gap:5px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:3px}.filter{white-space:nowrap;padding:9px 12px}.toolbar>select{margin-left:auto}.event-grid{grid-template-columns:1fr;gap:15px}.event-image-wrap{height:205px}.event-body{padding:16px}.event-modal{padding:23px 19px 20px;max-height:92vh}.modal-header h2{font-size:29px}.form-row{grid-template-columns:1fr;gap:0}.modal-copy{margin-bottom:18px}.empty-state{padding:55px 15px}.toast{max-width:calc(100% - 30px);white-space:normal;text-align:center}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Registration ticket and QR modal */
+.event-card-actions{display:flex;gap:8px;margin-top:16px}
+.register-button,.view-ticket-button{flex:1;min-height:38px;border:0;border-radius:100px;background:#292b24;color:#f7f0dc;font-size:10px;padding:0 13px;transition:transform .2s,background .2s}
+.register-button:hover,.view-ticket-button:hover{transform:translateY(-2px);background:#41483a}
+.view-ticket-button{background:#dfe4d4;color:#343a2e;border:1px solid #cbd2bd}
+.view-ticket-button:hover{background:#d2dac7}
+.ticket-backdrop{position:fixed;inset:0;z-index:45;background:rgba(26,29,24,.58);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.ticket-backdrop.open{opacity:1;visibility:visible}
+.ticket-modal{position:relative;width:min(390px,100%);background:#f4efdf;border-radius:22px;padding:30px 25px 24px;text-align:center;box-shadow:0 30px 100px #15171155;transform:translateY(12px) scale(.985);transition:transform .25s var(--ease)}
+.ticket-backdrop.open .ticket-modal{transform:translateY(0) scale(1)}
+.ticket-close{position:absolute;right:15px;top:15px}
+.ticket-modal h2{font:400 29px Manrope,sans-serif;letter-spacing:-1.2px;margin:10px 0 5px}
+.ticket-modal h2 span{color:#c77f45}
+.ticket-subtitle{font-size:12px;color:#656b5e;margin:0 0 18px}
+.ticket-qr{width:190px;height:190px;margin:0 auto 17px;padding:10px;background:#fff;border-radius:13px;display:grid;place-items:center}
+.ticket-qr img,.ticket-qr canvas{max-width:100%;max-height:100%;display:block}
+.ticket-id-label{font-size:8px;letter-spacing:1.5px;color:#828675;font-weight:700}
+.ticket-id{font:600 12px 'DM Sans',sans-serif;letter-spacing:1.2px;color:#33392d;margin-top:5px}
+.ticket-instruction{font-size:10px;color:#777c6d;margin:10px 0 17px}
+.calendar-button{height:42px;display:flex;align-items:center;justify-content:center;border-radius:100px;background:#dfe5d6;color:#34412f;font-size:11px;font-weight:700;margin-bottom:9px;border:1px solid #cbd4c0}
+.calendar-button:hover{background:#d2dcc9}
+.ticket-done{height:42px;width:100%;border:0;border-radius:100px;background:#292b24;color:#f7f0dc;font-size:11px}
+@media(max-width:620px){.event-card-actions{gap:7px}.ticket-modal{padding:28px 20px 20px}}
+
+  </style>
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Campus home"><span class="brand-mark">c</span><span>campus<span class="brand-dot">.</span></span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a><a class="active" href="#events">Events</a>
+      <a href="#events">Discover</a>
+    </nav>
+    <div class="header-actions">
+      <a class="back-link" href="index.html">← Back to campus</a>
+      <button class="menu-button" id="menuButton" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-heading">
+      <div class="eyebrow"><span class="live-dot"></span> YOUR CAMPUS, IN REAL LIFE</div>
+      <div class="heading-row">
+        <div>
+          <h1>Make plans.<br><span>Make memories.</span></h1>
+          <p class="intro">Discover what's happening around campus, or bring people together by sharing an event of your own.</p>
+        </div>
+        <button class="primary-button" id="openFormButton"><span>＋</span> Post an event</button>
+      </div>
+      <div class="heading-rule"><span>THE CAMPUS EVENT BOARD</span><span id="eventCount">0 EVENTS</span></div>
+    </section>
+
+    <section class="events-section" id="events">
+      <div class="toolbar">
+        <label class="search-box"><span>⌕</span><input id="eventSearch" type="search" placeholder="Search events, clubs or venues..." aria-label="Search events"></label>
+        <div class="filters" role="group" aria-label="Filter events">
+          <button class="filter active" data-filter="All">All events</button>
+          <button class="filter" data-filter="Workshop">Workshops</button>
+          <button class="filter" data-filter="Cultural">Cultural</button>
+          <button class="filter" data-filter="Sports">Sports</button>
+          <button class="filter" data-filter="Other">Other</button>
+        </div>
+        <select id="eventSort" aria-label="Sort events">
+          <option value="soonest">Soonest first</option>
+          <option value="latest">Recently posted</option>
+        </select>
+      </div>
+
+      <div class="event-grid" id="eventGrid" aria-live="polite">
+        <div class="empty-state" id="emptyState">
+          <span class="empty-mark">✳</span>
+          <h2>No events yet</h2>
+          <p>Be the first to share something happening on campus.</p>
+          <button class="text-button" id="emptyPostButton">Post the first event ↗</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="eventModal" aria-hidden="true">
+    <section class="event-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div><span class="eyebrow">BRING YOUR CAMPUS TOGETHER</span><h2 id="modalTitle">Post an event<span>.</span></h2></div>
+        <button class="close-button" id="closeModalButton" aria-label="Close">×</button>
+      </div>
+      <p class="modal-copy">Add the details and a thumbnail. Your event will appear on the campus board after you publish it.</p>
+
+      <form id="eventForm">
+        <div class="field">
+          <label for="eventTitle">Event name <span>*</span></label>
+          <input id="eventTitle" name="title" maxlength="80" placeholder="e.g. Inter-college music night" required>
+        </div>
+        <div class="field">
+          <label for="eventDescription">About the event <span>*</span></label>
+          <textarea id="eventDescription" name="description" rows="3" maxlength="500" placeholder="What is happening? Who can join?" required></textarea>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="eventCategory">Category <span>*</span></label>
+            <select id="eventCategory" name="category" required>
+              <option value="">Choose category</option><option>Workshop</option><option>Cultural</option><option>Sports</option><option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="eventOrganizer">Organised by <span>*</span></label>
+            <input id="eventOrganizer" name="organizer" maxlength="70" placeholder="Club / department / name" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="eventDate">Date <span>*</span></label><input id="eventDate" name="date" type="date" required></div>
+          <div class="field"><label for="eventTime">Time <span>*</span></label><input id="eventTime" name="time" type="time" required></div>
+        </div>
+        <div class="field">
+          <label for="eventVenue">Venue <span>*</span></label>
+          <input id="eventVenue" name="venue" maxlength="100" placeholder="Building, auditorium or online" required>
+        </div>
+        <div class="field">
+          <label>Event thumbnail <span>*</span></label>
+          <label class="upload-area" for="eventImage" id="uploadArea">
+            <img id="imagePreview" alt="Selected event thumbnail preview" hidden>
+            <span class="upload-icon">＋</span>
+            <strong id="uploadTitle">Choose an event image</strong>
+            <small id="uploadHint">JPG, PNG or WEBP · up to 5 MB</small>
+          </label>
+          <input id="eventImage" name="image" type="file" accept="image/png,image/jpeg,image/webp" required hidden>
+        </div>
+        <p class="form-error" id="formError" role="alert"></p>
+        <div class="modal-actions">
+          <button type="button" class="cancel-button" id="cancelButton">Cancel</button>
+          <button type="submit" class="publish-button" id="publishButton">Publish event <span>↗</span></button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div class="ticket-backdrop" id="ticketModal" aria-hidden="true">
+    <section class="ticket-modal" role="dialog" aria-modal="true" aria-labelledby="ticketTitle">
+      <button class="close-button ticket-close" id="closeTicketButton" aria-label="Close ticket">×</button>
+      <span class="eyebrow">YOU'RE ON THE LIST</span>
+      <h2 id="ticketTitle">Your event ticket<span>.</span></h2>
+      <p class="ticket-subtitle" id="ticketEventName"></p>
+      <div class="ticket-qr" id="ticketQr" aria-label="Your unique event QR code"></div>
+      <div class="ticket-id-label">TICKET ID</div>
+      <div class="ticket-id" id="ticketId"></div>
+      <p class="ticket-instruction">Show this QR code at the event entrance.</p>
+      <a class="calendar-button" id="calendarButton" href="#" target="_blank" rel="noopener">＋ Add to Google Calendar</a>
+      <button class="ticket-done" id="ticketDoneButton">Done</button>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+(() => {
+  const STORAGE_KEY = 'campusEvents';
+  const modal = document.getElementById('eventModal');
+  const form = document.getElementById('eventForm');
+  const grid = document.getElementById('eventGrid');
+  const emptyState = document.getElementById('emptyState');
+  const imageInput = document.getElementById('eventImage');
+  const imagePreview = document.getElementById('imagePreview');
+  const uploadArea = document.getElementById('uploadArea');
+  const uploadTitle = document.getElementById('uploadTitle');
+  const uploadHint = document.getElementById('uploadHint');
+  const formError = document.getElementById('formError');
+  const searchInput = document.getElementById('eventSearch');
+  const sortSelect = document.getElementById('eventSort');
+  const countLabel = document.getElementById('eventCount');
+  const toast = document.getElementById('toast');
+  const ticketModal = document.getElementById('ticketModal');
+  const ticketQr = document.getElementById('ticketQr');
+  const ticketIdLabel = document.getElementById('ticketId');
+  const calendarButton = document.getElementById('calendarButton');
+  const REGISTRATION_KEY = 'campusEventRegistrations';
+  let registrations = readRegistrations();
+  let selectedImageData = '';
+  let activeFilter = 'All';
+  let toastTimer;
+
+  function readRegistrations() {
+    try { return JSON.parse(localStorage.getItem(REGISTRATION_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function saveRegistrations() {
+    localStorage.setItem(REGISTRATION_KEY, JSON.stringify(registrations));
+  }
+
+  const readEvents = () => {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+    catch { return []; }
+  };
+  let events = readEvents();
+
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+  }
+
+  function openModal() {
+    form.reset();
+    resetImage();
+    formError.textContent = '';
+    const dateInput = document.getElementById('eventDate');
+    dateInput.min = new Date().toISOString().slice(0, 10);
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('eventTitle').focus(), 100);
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  function resetImage() {
+    selectedImageData = '';
+    imageInput.value = '';
+    imagePreview.removeAttribute('src');
+    imagePreview.hidden = true;
+    uploadArea.classList.remove('has-image');
+    uploadTitle.textContent = 'Choose an event image';
+    uploadHint.textContent = 'JPG, PNG or WEBP · up to 5 MB';
+  }
+
+  document.getElementById('openFormButton').addEventListener('click', openModal);
+  document.getElementById('emptyPostButton').addEventListener('click', openModal);
+  document.getElementById('closeModalButton').addEventListener('click', closeModal);
+  document.getElementById('cancelButton').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    if (e.key === 'Escape' && ticketModal.classList.contains('open')) closeTicketModal();
+  });
+  document.getElementById('closeTicketButton').addEventListener('click', closeTicketModal);
+  document.getElementById('ticketDoneButton').addEventListener('click', closeTicketModal);
+  ticketModal.addEventListener('click', e => { if (e.target === ticketModal) closeTicketModal(); });
+
+  imageInput.addEventListener('change', () => {
+    const file = imageInput.files[0];
+    formError.textContent = '';
+    if (!file) return;
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      resetImage(); formError.textContent = 'Please choose a JPG, PNG or WEBP image.'; return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      resetImage(); formError.textContent = 'Image must be 5 MB or smaller.'; return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      selectedImageData = reader.result;
+      imagePreview.src = selectedImageData;
+      imagePreview.hidden = false;
+      uploadArea.classList.add('has-image');
+      uploadTitle.textContent = file.name;
+      uploadHint.textContent = 'Click to change image';
+    };
+    reader.onerror = () => { formError.textContent = 'Could not read this image. Please try another.'; };
+    reader.readAsDataURL(file);
+  });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    formError.textContent = '';
+    if (!form.reportValidity()) return;
+    if (!selectedImageData) {
+      formError.textContent = 'Please add an event thumbnail before publishing.';
+      return;
+    }
+    const data = new FormData(form);
+    const newEvent = {
+      id: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())),
+      title: String(data.get('title')).trim(),
+      description: String(data.get('description')).trim(),
+      category: String(data.get('category')),
+      organizer: String(data.get('organizer')).trim(),
+      date: String(data.get('date')),
+      time: String(data.get('time')),
+      venue: String(data.get('venue')).trim(),
+      image: selectedImageData,
+      createdAt: new Date().toISOString()
+    };
+    if (new Date(`${newEvent.date}T${newEvent.time}`) < new Date()) {
+      formError.textContent = 'Please choose a future date and time.';
+      return;
+    }
+    events.unshift(newEvent);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+    } catch (error) {
+      events.shift();
+      formError.textContent = 'Browser storage is full. Try a smaller image.';
+      return;
+    }
+    closeModal();
+    activeFilter = 'All';
+    document.querySelectorAll('.filter').forEach(b => b.classList.toggle('active', b.dataset.filter === 'All'));
+    searchInput.value = '';
+    renderEvents();
+    showToast('Your event has been published.');
+    document.getElementById('events').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  function formatDate(dateString) {
+    return new Date(`${dateString}T00:00:00`).toLocaleDateString(undefined, {weekday:'short', day:'numeric', month:'short', year:'numeric'});
+  }
+  function formatTime(timeString) {
+    const [hour, minute] = timeString.split(':').map(Number);
+    return new Date(2000, 0, 1, hour, minute).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+  }
+  function safeText(value) {
+    return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  }
+  function createCard(event) {
+    const article = document.createElement('article');
+    article.className = 'event-card';
+    article.innerHTML = `
+      <div class="event-image-wrap">
+        <img class="event-image" src="${event.image}" alt="${safeText(event.title)} event thumbnail">
+        <span class="event-category">${safeText(event.category)}</span>
+      </div>
+      <div class="event-body">
+        <div class="event-date">${safeText(formatDate(event.date))}</div>
+        <h2>${safeText(event.title)}</h2>
+        <p class="event-description">${safeText(event.description)}</p>
+        <div class="event-meta">
+          <div class="meta-line"><span class="meta-icon">◷</span>${safeText(formatTime(event.time))}</div>
+          <div class="meta-line"><span class="meta-icon">⌖</span>${safeText(event.venue)}</div>
+        </div>
+        <div class="event-organizer">ORGANISED BY ${safeText(event.organizer).toUpperCase()}</div>
+        <div class="event-card-actions">
+          ${registrations[event.id]
+            ? '<button class="view-ticket-button" type="button" data-ticket="' + safeText(event.id) + '">View my ticket ↗</button>'
+            : '<button class="register-button" type="button" data-register="' + safeText(event.id) + '">Register for event ↗</button>'}
+          <a class="calendar-button" href="${buildCalendarUrl(event)}" target="_blank" rel="noopener">＋ Calendar</a>
+        </div>
+      </div>`;
+    return article;
+  }
+  function toCalendarDate(date, time) {
+    const localDate = new Date(`${date}T${time}:00`);
+    return localDate.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  }
+  function buildCalendarUrl(event) {
+    const start = new Date(`${event.date}T${event.time}:00`);
+    const end = new Date(start.getTime() + 60 * 60 * 1000);
+    const format = d => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    const params = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: event.title,
+      dates: `${format(start)}/${format(end)}`,
+      details: `${event.description}\nOrganised by: ${event.organizer}`,
+      location: event.venue
+    });
+    return `https://calendar.google.com/calendar/render?${params.toString()}`;
+  }
+  function closeTicketModal() {
+    ticketModal.classList.remove('open');
+    ticketModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  function showTicket(event) {
+    const registration = registrations[event.id];
+    if (!registration) return;
+    document.getElementById('ticketEventName').textContent = event.title;
+    ticketIdLabel.textContent = registration.ticketId;
+    calendarButton.href = buildCalendarUrl(event);
+    ticketQr.replaceChildren();
+    const qrPayload = JSON.stringify({
+      ticketId: registration.ticketId,
+      eventId: event.id,
+      eventTitle: event.title
+    });
+    if (window.QRCode) {
+      new QRCode(ticketQr, {
+        text: qrPayload,
+        width: 170,
+        height: 170,
+        colorDark: '#292b24',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    } else {
+      ticketQr.textContent = 'QR code could not load. Check your internet connection and reopen this ticket.';
+    }
+    ticketModal.classList.add('open');
+    ticketModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function registerForEvent(eventId) {
+    const event = events.find(item => item.id === eventId);
+    if (!event) return;
+    if (new Date(`${event.date}T${event.time}:00`) < new Date()) {
+      showToast('Registration is closed because this event has started.');
+      return;
+    }
+    if (!registrations[eventId]) {
+      const ticketId = `CAMP-${Math.random().toString(36).slice(2, 6).toUpperCase()}-${Date.now().toString(36).slice(-5).toUpperCase()}`;
+      registrations[eventId] = { ticketId, registeredAt: new Date().toISOString() };
+      try { saveRegistrations(); }
+      catch {
+        delete registrations[eventId];
+        showToast('Could not save your registration in this browser.');
+        return;
+      }
+      renderEvents();
+      showToast('Registration confirmed. Your ticket is ready.');
+    }
+    showTicket(event);
+  }
+
+  function renderEvents() {
+    const query = searchInput.value.trim().toLowerCase();
+    let visible = events.filter(event => {
+      const matchesCategory = activeFilter === 'All' || event.category === activeFilter;
+      const searchable = `${event.title} ${event.description} ${event.organizer} ${event.venue} ${event.category}`.toLowerCase();
+      return matchesCategory && searchable.includes(query);
+    });
+    visible.sort((a,b) => sortSelect.value === 'latest'
+      ? new Date(b.createdAt) - new Date(a.createdAt)
+      : new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`));
+    countLabel.textContent = `${events.length} ${events.length === 1 ? 'EVENT' : 'EVENTS'}`;
+    grid.replaceChildren();
+    if (!events.length) {
+      grid.appendChild(emptyState);
+      emptyState.hidden = false;
+    } else if (!visible.length) {
+      const noResults = document.createElement('div');
+      noResults.className = 'no-results';
+      noResults.textContent = 'No events match your search. Try another keyword or category.';
+      grid.appendChild(noResults);
+    } else {
+      visible.forEach(event => grid.appendChild(createCard(event)));
+    }
+  }
+
+  document.querySelectorAll('.filter').forEach(button => {
+    button.addEventListener('click', () => {
+      activeFilter = button.dataset.filter;
+      document.querySelectorAll('.filter').forEach(item => item.classList.toggle('active', item === button));
+      renderEvents();
+    });
+  });
+  searchInput.addEventListener('input', renderEvents);
+  sortSelect.addEventListener('change', renderEvents);
+  grid.addEventListener('click', e => {
+    const registerButton = e.target.closest('[data-register]');
+    const ticketButton = e.target.closest('[data-ticket]');
+    if (registerButton) registerForEvent(registerButton.dataset.register);
+    if (ticketButton) {
+      const event = events.find(item => item.id === ticketButton.dataset.ticket);
+      if (event) showTicket(event);
+    }
+  });
+
+  document.getElementById('menuButton').addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('open');
+  }));
+
+  renderEvents();
+})();
+  </script>
+</body>
+</html>
