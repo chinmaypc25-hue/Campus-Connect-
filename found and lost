@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Found & Lost | Campus Connect</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --sage:#a9b9a0;
+  --sage-dark:#526c5c;
+  --gold:#d9b66c;
+  --cream:#f4f2e9;
+  --dark:#172c29;
+  --muted:#71817b;
+  --white:#fffefa;
+  --border:#e4e6dc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark)}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+nav{height:78px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;background:var(--white);border-bottom:1px solid var(--border)}
+.logo{font-family:Manrope,sans-serif;font-weight:800;font-size:22px;letter-spacing:-1px}
+.logo span{color:var(--sage-dark)}
+.navlinks{display:flex;gap:30px;align-items:center;font-size:14px;color:var(--muted)}
+.navlinks a:hover{color:var(--dark)}
+.primary{background:var(--dark);color:white;border:0;padding:13px 20px;border-radius:30px;font-weight:700}
+.primary:hover{background:var(--sage-dark);transform:translateY(-2px)}
+.hero{padding:75px 8% 55px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--sage-dark);font-weight:800;margin-bottom:18px}
+h1{font-family:Manrope,sans-serif;font-size:clamp(42px,6vw,72px);line-height:1.05;letter-spacing:-3px;max-width:650px}
+h1 span{color:var(--sage-dark)}
+.hero p{color:var(--muted);line-height:1.8;margin-top:20px;max-width:480px}
+.hero-art{background:var(--sage);border-radius:30px;min-height:250px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-art .circle{width:180px;height:180px;border-radius:50%;background:var(--cream);display:grid;place-items:center;font-size:75px;box-shadow:0 20px 50px #526c5c33}
+.hero-art:before,.hero-art:after{content:"";position:absolute;border:1px solid #ffffff80;border-radius:50%;width:270px;height:270px}
+.hero-art:after{width:350px;height:350px}
+.search-wrap{padding:0 8% 35px}
+.searchbar{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:12px;display:flex;gap:12px;align-items:center}
+.searchbar input{flex:1;border:0;outline:0;background:transparent;padding:10px;font-size:15px;min-width:0}
+.search-icon{padding-left:12px;color:var(--muted)}
+.content{padding:20px 8% 85px}
+.section-top{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:25px}
+.section-top h2{font-family:Manrope,sans-serif;font-size:27px;letter-spacing:-1px}
+.section-top p{color:var(--muted);font-size:13px;margin-top:5px}
+.tabs{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.tab,.filter{border:1px solid var(--border);background:var(--white);padding:10px 17px;border-radius:25px;color:var(--muted);font-size:13px}
+.tab.active,.filter.active{background:var(--dark);color:white;border-color:var(--dark)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:25px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.item-card{background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:.25s}
+.item-card:hover{transform:translateY(-5px);box-shadow:0 15px 35px #172c2910}
+.item-image{height:190px;background:#e8ecdf;display:grid;place-items:center;overflow:hidden}
+.item-image img{width:100%;height:100%;object-fit:cover}
+.no-photo{font-size:48px;opacity:.7}
+.item-body{padding:19px}
+.item-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px}
+.pill{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;background:#edf1e9;color:var(--sage-dark);padding:7px 10px;border-radius:20px}
+.item-body h3{font-family:Manrope,sans-serif;font-size:19px;margin-bottom:8px}
+.item-body .desc{font-size:13px;line-height:1.6;color:var(--muted);min-height:42px}
+.location{font-size:12px;color:var(--sage-dark);margin-top:14px}
+.card-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:14px;margin-top:16px}
+.card-bottom small{color:var(--muted);font-size:11px}
+.view-btn{border:0;background:transparent;color:var(--sage-dark);font-weight:800;font-size:13px}
+.empty{background:var(--white);border:1px dashed #cbd3c5;border-radius:22px;text-align:center;padding:65px 20px;grid-column:1/-1}
+.empty .emoji{font-size:48px;margin-bottom:15px}
+.empty h3{font-family:Manrope,sans-serif;font-size:22px}
+.empty p{color:var(--muted);font-size:14px;margin:10px auto 20px;max-width:390px;line-height:1.6}
+.how{background:var(--dark);color:white;padding:65px 8%}
+.how h2{font-family:Manrope,sans-serif;font-size:32px;letter-spacing:-1px}
+.how>p{color:#b8c4bc;margin-top:10px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:35px}
+.step{border-top:1px solid #526c5c;padding-top:20px}
+.step b{color:var(--gold);font-size:13px}
+.step h3{margin:12px 0 8px;font-family:Manrope}
+.step p{font-size:13px;color:#b8c4bc;line-height:1.7}
+footer{padding:28px 8%;display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+.overlay{position:fixed;inset:0;background:#10201dcc;z-index:10;display:none;align-items:center;justify-content:center;padding:18px;overflow-y:auto}
+.overlay.show{display:flex}
+.modal{background:var(--white);width:100%;max-width:570px;border-radius:23px;padding:28px;max-height:92vh;overflow-y:auto}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.modal-head h2{font-family:Manrope;font-size:24px}
+.close{border:0;background:#edf0e9;border-radius:50%;width:35px;height:35px;font-size:20px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;font-weight:800;margin-bottom:8px}
+.field input,.field textarea,.field select{width:100%;border:1px solid var(--border);background:white;border-radius:11px;padding:12px;outline:0;color:var(--dark)}
+.field textarea{min-height:100px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--sage-dark)}
+.hint{font-size:11px;color:var(--muted);margin-top:6px}
+.upload{border:1px dashed #b9c5b5;padding:20px;border-radius:13px;text-align:center;color:var(--muted);font-size:13px}
+.upload input{margin-top:10px;max-width:100%}
+.preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.preview img{width:75px;height:75px;object-fit:cover;border-radius:9px}
+.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+.secondary{background:#edf0e9;border:0;padding:12px 18px;border-radius:25px;color:var(--dark)}
+.detail-photo{width:100%;max-height:270px;object-fit:cover;border-radius:14px;margin-bottom:18px}
+.detail-text{color:var(--muted);font-size:14px;line-height:1.7;margin:12px 0}
+.detail-info{background:#f0f2eb;border-radius:12px;padding:14px;margin:15px 0;font-size:13px;line-height:1.8}
+.reply{border-top:1px solid var(--border);padding:14px 0}
+.reply strong{font-size:13px}
+.reply p{font-size:13px;color:var(--muted);line-height:1.6;margin-top:5px}
+.reply small{font-size:11px;color:var(--sage-dark)}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.hero-art{min-height:200px}.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){nav{padding:0 5%;height:68px}.navlinks{gap:12px;font-size:12px}.navlinks a:nth-child(2),.navlinks a:nth-child(3){display:none}.hero{padding:55px 6% 35px}h1{letter-spacing:-2px}.search-wrap,.content{padding-left:6%;padding-right:6%}.grid{grid-template-columns:1fr}.section-top{align-items:flex-start;flex-direction:column}.steps{grid-template-columns:1fr;gap:22px}.how{padding:50px 6%}footer{padding:25px 6%;gap:12px;flex-direction:column}.modal{padding:21px}}
+</style>
+</head>
+
+<body>
+<nav>
+  <a class="logo" href="../index.html">campus<span>connect.</span></a>
+  <div class="navlinks">
+    <a href="../index.html">Home</a>
+    <a href="#lost-board">Found & Lost</a>
+    <a href="#how">How it works</a>
+  </div>
+  <button class="primary" onclick="openPost()">＋ Report an item</button>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow">A little help goes a long way</div>
+    <h1>Lost something? <span>Let's find it.</span></h1>
+    <p>Lost your notebook, ID card, keys or something important around campus? Post it here. Someone might have seen it — or even found it.</p>
+  </div>
+  <div class="hero-art">
+    <div class="circle">🔎</div>
+  </div>
+</section>
+
+<div class="search-wrap">
+  <div class="searchbar">
+    <span class="search-icon">⌕</span>
+    <input id="search" placeholder="Search for a lost item..." oninput="render()">
+  </div>
+</div>
+
+<section class="content" id="lost-board">
+  <div class="section-top">
+    <div>
+      <h2>The Lost & Found Board</h2>
+      <p>Help someone reunite with something they lost.</p>
+    </div>
+    <button class="primary" onclick="openPost()">＋ Report lost item</button>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" id="allTab" onclick="setView('all')">All reports</button>
+    <button class="tab" id="mineTab" onclick="setView('mine')">My reports</button>
+  </div>
+
+  <div class="filters">
+    <button class="filter active" onclick="setFilter('All',this)">All items</button>
+    <button class="filter" onclick="setFilter('Electronics',this)">Electronics</button>
+    <button class="filter" onclick="setFilter('ID & Cards',this)">ID & Cards</button>
+    <button class="filter" onclick="setFilter('Books & Notes',this)">Books & Notes</button>
+    <button class="filter" onclick="setFilter('Personal Items',this)">Personal items</button>
+    <button class="filter" onclick="setFilter('Other',this)">Other</button>
+  </div>
+
+  <div class="grid" id="itemsGrid"></div>
+</section>
+
+<section class="how" id="how">
+  <div class="eyebrow" style="color:var(--gold)">It takes a campus</div>
+  <h2>One post. One helpful person. One happy reunion.</h2>
+  <p>Here's how the Lost & Found community works.</p>
+  <div class="steps">
+    <div class="step"><b>01 / REPORT</b><h3>Tell us what you lost</h3><p>Share the item's name, description, last known location and a photo if you have one.</p></div>
+    <div class="step"><b>02 / RESPOND</b><h3>Help each other out</h3><p>If someone has seen or found the item, they can reply directly to the report.</p></div>
+    <div class="step"><b>03 / REUNITE</b><h3>Get it back</h3><p>Connect with the person who responded and arrange a safe campus pickup.</p></div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Campus Connect</span>
+  <span>Made for the campus community.</span>
+</footer>
+
+<!-- CREATE / EDIT REPORT MODAL -->
+<div class="overlay" id="postOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="formTitle">Report a lost item</h2>
+      <button class="close" onclick="closeModal('postOverlay')">×</button>
+    </div>
+    <form id="postForm">
+      <div class="field">
+        <label>What did you lose? *</label>
+        <input id="itemName" required maxlength="70" placeholder="e.g. Black Samsung earbuds">
+      </div>
+      <div class="field">
+        <label>Category *</label>
+        <select id="category" required>
+          <option value="">Choose a category</option>
+          <option>Electronics</option>
+          <option>ID & Cards</option>
+          <option>Books & Notes</option>
+          <option>Personal Items</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Description *</label>
+        <textarea id="description" required maxlength="1000" placeholder="Describe the item. Mention its colour, brand, marks or anything that could help identify it."></textarea>
+      </div>
+      <div class="field">
+        <label>Where did you last see it? *</label>
+        <input id="location" required placeholder="e.g. Library, Block B, Canteen...">
+      </div>
+      <div class="field">
+        <label>When did you last see it?</label>
+        <input id="lostDate" type="date">
+      </div>
+      <div class="field">
+        <label>Photo (optional)</label>
+        <div class="upload">
+          Add a photo of the item if you have one.
+          <input id="photo" type="file" accept="image/*">
+          <div class="preview" id="photoPreview"></div>
+        </div>
+        <div class="hint">One image, maximum 5 MB.</div>
+      </div>
+      <div class="field">
+        <label>Your name *</label>
+        <input id="ownerName" required placeholder="Your name">
+      </div>
+      <div class="field">
+        <label>Contact email *</label>
+        <input id="ownerEmail" type="email" required placeholder="you@example.com">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="secondary" onclick="closeModal('postOverlay')">Cancel</button>
+        <button class="primary" type="submit" id="submitPost">Publish report ↗</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ITEM DETAILS AND REPLIES -->
+<div class="overlay" id="detailOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Lost item details</h2>
+      <button class="close" onclick="closeModal('detailOverlay')">×</button>
+    </div>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<script>
+let items = [];
+let currentView = 'all';
+let currentFilter = 'All';
+let editingId = null;
+let currentDetailId = null;
+let selectedPhoto = '';
+
+const grid = document.getElementById('itemsGrid');
+
+function openPost(id = null) {
+  editingId = id;
+  document.getElementById('postForm').reset();
+  document.getElementById('photoPreview').innerHTML = '';
+  selectedPhoto = '';
+
+  const item = items.find(x => x.id === id);
+  document.getElementById('formTitle').textContent = item ? 'Edit your report' : 'Report a lost item';
+  document.getElementById('submitPost').textContent = item ? 'Save changes ↗' : 'Publish report ↗';
+
+  if (item) {
+    document.getElementById('itemName').value = item.name;
+    document.getElementById('category').value = item.category;
+    document.getElementById('description').value = item.description;
+    document.getElementById('location').value = item.location;
+    document.getElementById('lostDate').value = item.date || '';
+    document.getElementById('ownerName').value = item.owner;
+    document.getElementById('ownerEmail').value = item.email;
+    selectedPhoto = item.photo || '';
+    if (selectedPhoto) showPreview(selectedPhoto);
+  }
+
+  document.getElementById('postOverlay').classList.add('show');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('show');
+}
+
+document.getElementById('photo').addEventListener('change', function() {
+  const file = this.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) {
+    alert('Please choose an image smaller than 5 MB.');
+    this.value = '';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = e => {
+    selectedPhoto = e.target.result;
+    showPreview(selectedPhoto);
+  };
+  reader.readAsDataURL(file);
+});
+
+function showPreview(src) {
+  document.getElementById('photoPreview').innerHTML = `<img src="${src}" alt="Selected item photo">`;
+}
+
+document.getElementById('postForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const data = {
+    name: document.getElementById('itemName').value.trim(),
+    category: document.getElementById('category').value,
+    description: document.getElementById('description').value.trim(),
+    location: document.getElementById('location').value.trim(),
+    date: document.getElementById('lostDate').value,
+    owner: document.getElementById('ownerName').value.trim(),
+    email: document.getElementById('ownerEmail').value.trim(),
+    photo: selectedPhoto
+  };
+
+  if (!data.name || !data.description || !data.location || !data.owner || !data.email || !data.category) return;
+
+  if (editingId) {
+    const item = items.find(x => x.id === editingId);
+    Object.assign(item, data);
+  } else {
+    items.unshift({
+      id: Date.now(),
+      ...data,
+      replies: [],
+      created: new Date().toLocaleDateString()
+    });
+  }
+
+  closeModal('postOverlay');
+  currentView = 'all';
+  updateTabs();
+  render();
+});
+
+function setView(view) {
+  currentView = view;
+  updateTabs();
+  render();
+}
+
+function updateTabs() {
+  document.getElementById('allTab').classList.toggle('active', currentView === 'all');
+  document.getElementById('mineTab').classList.toggle('active', currentView === 'mine');
+}
+
+function setFilter(value, button) {
+  currentFilter = value;
+  document.querySelectorAll('.filter').forEach(x => x.classList.remove('active'));
+  button.classList.add('active');
+  render();
+}
+
+function render() {
+  const query = document.getElementById('search').value.toLowerCase();
+
+  const filtered = items.filter(item => {
+    const matchesView = currentView === 'all' || item;
+    const matchesCategory = currentFilter === 'All' || item.category === currentFilter;
+    const matchesSearch = [item.name,item.description,item.location,item.category].join(' ').toLowerCase().includes(query);
+    return matchesView && matchesCategory && matchesSearch;
+  });
+
+  grid.innerHTML = '';
+
+  if (!filtered.length) {
+    const title = currentView === 'mine' ? 'You haven’t reported anything yet.' : 'No lost items reported yet.';
+    const message = currentView === 'mine'
+      ? 'Your reports will appear here after you publish one.'
+      : 'The board is empty right now. Be the first to report a lost item and help your campus community.';
+    grid.innerHTML = `
+      <div class="empty">
+        <div class="emoji">🔎</div>
+        <h3>${title}</h3>
+        <p>${message}</p>
+        ${currentView === 'all' ? '<button class="primary" onclick="openPost()">Report a lost item ↗</button>' : ''}
+      </div>`;
+    return;
+  }
+
+  filtered.forEach(item => {
+    const card = document.createElement('article');
+    card.className = 'item-card';
+    const image = item.photo
+      ? `<img src="${item.photo}" alt="${escapeHTML(item.name)}">`
+      : '<div class="no-photo">🔍</div>';
+
+    card.innerHTML = `
+      <div class="item-image">${image}</div>
+      <div class="item-body">
+        <div class="item-meta">
+          <span class="pill">${escapeHTML(item.category)}</span>
+          <small>${item.replies.length} replies</small>
+        </div>
+        <h3>${escapeHTML(item.name)}</h3>
+        <p class="desc">${escapeHTML(item.description)}</p>
+        <div class="location">⌖ Last seen: ${escapeHTML(item.location)}</div>
+        <div class="card-bottom">
+          <small>Reported by ${escapeHTML(item.owner)}</small>
+          <button class="view-btn" onclick="openDetails(${item.id})">View & reply ↗</button>
+        </div>
+        ${currentView === 'mine' ? `
+          <div style="display:flex;gap:15px;margin-top:14px">
+            <button class="view-btn" onclick="openPost(${item.id})">Edit</button>
+            <button class="view-btn" style="color:#b45c4e" onclick="deleteItem(${item.id})">Delete</button>
+          </div>` : ''}
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function openDetails(id) {
+  currentDetailId = id;
+  const item = items.find(x => x.id === id);
+  if (!item) return;
+
+  const photo = item.photo ? `<img class="detail-photo" src="${item.photo}" alt="Lost item">` : '';
+  const replies = item.replies.length
+    ? item.replies.map(reply => `
+      <div class="reply">
+        <strong>${escapeHTML(reply.name)}</strong>
+        <small> · ${escapeHTML(reply.date)}</small>
+        <p>${escapeHTML(reply.message)}</p>
+        <a style="font-size:12px;color:var(--sage-dark);font-weight:700" href="mailto:${encodeURIComponent(item.email)}?subject=${encodeURIComponent('Regarding your lost ' + item.name)}">Contact the person who lost it ↗</a>
+      </div>`).join('')
+    : '<p class="hint">No replies yet. Have you seen this item? Be the first to help.</p>';
+
+  document.getElementById('detailContent').innerHTML = `
+    ${photo}
+    <span class="pill">${escapeHTML(item.category)}</span>
+    <h2 style="font-family:Manrope;margin-top:12px">${escapeHTML(item.name)}</h2>
+    <p class="detail-text">${escapeHTML(item.description)}</p>
+    <div class="detail-info">
+      <b>Last seen:</b> ${escapeHTML(item.location)}<br>
+      <b>Last seen date:</b> ${item.date || 'Not specified'}<br>
+      <b>Reported by:</b> ${escapeHTML(item.owner)}
+    </div>
+    <h3 style="font-family:Manrope;margin:22px 0 10px">Replies & updates (${item.replies.length})</h3>
+    <div>${replies}</div>
+    <form id="replyForm" style="margin-top:20px">
+      <div class="field"><label>Your name *</label><input id="replyName" required placeholder="Your name"></div>
+      <div class="field"><label>Your email *</label><input id="replyEmail" type="email" required placeholder="you@example.com"></div>
+      <div class="field"><label>Your response *</label><textarea id="replyMessage" required placeholder="I saw this near the library... / I think I found this item..."></textarea></div>
+      <button class="primary" type="submit">Send a reply ↗</button>
+    </form>`;
+
+  document.getElementById('replyForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const current = items.find(x => x.id === currentDetailId);
+    if (!current) return;
+
+    current.replies.push({
+      name: document.getElementById('replyName').value.trim(),
+      email: document.getElementById('replyEmail').value.trim(),
+      message: document.getElementById('replyMessage').value.trim(),
+      date: new Date().toLocaleDateString()
+    });
+
+    openDetails(currentDetailId);
+    render();
+  });
+
+  document.getElementById('detailOverlay').classList.add('show');
+}
+
+function deleteItem(id) {
+  if (!confirm('Are you sure you want to delete this report?')) return;
+  items = items.filter(x => x.id !== id);
+  render();
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+  })[char]);
+}
+
+document.querySelectorAll('.overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.classList.remove('show');
+  });
+});
+
+render();
+</script>
+</body>
+</html>
